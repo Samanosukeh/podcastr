@@ -2,8 +2,22 @@
 // SSR
 // SSG - static site generator -> como só é postado 1 episódio por dia, não há necessidade de buscar os dados várias vezes
 
-export default function Home(props) {//recebendo os props buscados no await
-  console.log(props.episodes);
+import { GetStaticProps } from 'next';
+import { api } from '../services/api';
+
+type Episode = {//array do tipo objeto com os seguintes itens abaixo
+  id: string;
+  title: string;
+  members: string;
+  // ...
+}
+
+type HomeProps = {
+  episodes: Episode[];
+}
+
+export default function Home(props: HomeProps) {//recebendo os props buscados no await
+  
 
   return (
     <div>
@@ -15,9 +29,14 @@ export default function Home(props) {//recebendo os props buscados no await
 
 
 //só de declarar essa função ja vai valer o SSR
-export async function getStaticProps() { //static site generation só funciona em produção -> getStaticProps()
-  const response = await fetch('http://localhost:3333/episodes');
-  const data = await response.json();
+export const getStaticProps: GetStaticProps = async () => { //static site generation só funciona em produção -> getStaticProps()
+  const { data } = await api.get('episodes', {
+    params: {
+      _limit: 12,
+      _sort: 'published_at',
+      _order: 'desc'
+    }
+  });
   
   return {
     props: {
