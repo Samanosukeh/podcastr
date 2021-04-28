@@ -111,11 +111,27 @@ As regras de CSS desse componente nunca serão compartilhadas com os outros comp
         border: 0;
         font-size: 0;
 
+        transition: filter 0.2s;
+
+        
+        //se o botão estiver desabilitado
+        &:disabled {
+            cursor: default;
+        }
+
+        &:hover:not(:disabled) {
+            filter: brightness(0.7);
+        }
+
         &.playButton {
             width: 4rem;
             height: 4rem;
             border-radius: 1rem;
             background: var(--purple-400);
+
+            &:hover {
+                filter: brightness(0.95);
+            }
         }
     }
 }
