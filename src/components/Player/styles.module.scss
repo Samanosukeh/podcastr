@@ -129,7 +129,7 @@ As regras de CSS desse componente nunca serão compartilhadas com os outros comp
             border-radius: 1rem;
             background: var(--purple-400);
 
-            &:hover {
+            &:hover:not(:disabled) {
                 filter: brightness(0.95);
             }
         }
