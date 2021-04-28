@@ -3,11 +3,15 @@
 // SSG - static site generator -> como só é postado 1 episódio por dia, não há necessidade de buscar os dados várias vezes
 
 import { GetStaticProps } from 'next';
+import { useContext } from 'react';
 import Image from 'next/image';
+import Link from 'next/link';//usado para que ao clicar em um link não carrege todo o conteúdo que ja foi carregado
 import { api } from '../services/api';
 import { format, parseISO } from 'date-fns'; //parseISO pega uma data e converte para data do javascript
 import ptBR from 'date-fns/locale/pt-BR';
+
 import { convertDurationToTimeString } from '../utils/convertDurationToTimeString';
+import { PlayerContext } from '../contexts/PlayerContext';
 
 import styles from './home.module.scss';
 
@@ -29,11 +33,12 @@ type HomeProps = {
 }
 
 export default function Home({ latestEpisodes, allEpisodes }: HomeProps) {//recebendo os props buscados no await
+  const { play } = useContext(PlayerContext);// pegando apenas a função play
   
   return (
     <div className={styles.homepage}>
       <section className={styles.latestEpisodes}>
-        <h2>Últimos lançamentos</h2>
+        <h2>Últimos lançamentos </h2>
 
         <ul>
           {latestEpisodes.map(episode => {
@@ -50,13 +55,16 @@ export default function Home({ latestEpisodes, allEpisodes }: HomeProps) {//rece
                 />
 
                 <div className={styles.episodeDetails}>
-                  <a href="">{episode.title}</a>
+                  <Link href={`/episodes/${episode.id}`}>
+                    <a>{episode.title}</a>
+                  </Link>
                   <p>{episode.members}</p>
                   <span>{episode.publishedAt}</span>
                   <span>{episode.durationAsString}</span>
                 </div>
 
-                <button type="button">
+                {/*Passando uma arrow funcion por que a função passada nao tem retorno e recebe um argumento */}
+                <button type="button" onClick={() => play(episode)}>
                   <img src="/play-green.svg" alt="Tocar episódio"/>
                 </button>
               </li>
@@ -70,11 +78,13 @@ export default function Home({ latestEpisodes, allEpisodes }: HomeProps) {//rece
 
         <table cellSpacing={0}>
           <thead>
-            <th></th>
-            <th>Podcast</th>
-            <th>Integrantes</th>
-            <th>Data</th>
-            <th>Duração</th>
+            <tr>
+              <th></th>
+              <th>Podcast</th>
+              <th>Integrantes</th>
+              <th>Data</th>
+              <th>Duração</th>
+            </tr>
           </thead>
           <tbody>
             {allEpisodes.map(episode => {
@@ -91,7 +101,9 @@ export default function Home({ latestEpisodes, allEpisodes }: HomeProps) {//rece
                   </td>
 
                   <td>
-                    <a href="">{episode.title}</a>
+                    <Link href={`/episodes/${episode.id}`}>
+                      <a>{episode.title}</a>
+                    </Link>
                   </td>
                   <td>{episode.members}</td>
                   <td style={{ width: 100}}>{episode.publishedAt}</td>
