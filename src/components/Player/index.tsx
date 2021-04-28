@@ -1,4 +1,5 @@
 import { useContext } from 'react';
+import Image from 'next/image';
 
 import { PlayerContext } from '../../contexts/PlayerContext';
 
@@ -13,14 +14,22 @@ export function Player() {
         <div className={styles.playerContainer}>
             <header>
                 <img src="/playing.svg" alt="Tocando agora"/>
-                <strong>Tocando agora {episode?.title}</strong>
+                <strong>Tocando agora</strong>
             </header>
 
-            <div className={styles.emptyPlayer}>
-                <strong>Selecione um podecast para ouvir</strong>
-            </div>
+            { episode ? (
+                <div className={styles.currentEpisode}>
+                    <Image width={592} height={592} src={episode.thumbnail} objectFit="cover" />
+                    <strong>{episode.title}</strong>
+                    <span>{episode.members}</span>
+                </div>
+            ) : (//se nao tiver episodio mostre o html abaixo
+                <div className={styles.emptyPlayer}>
+                    <strong>Selecione um podecast para ouvir</strong>
+                </div>
+            ) }
 
-            <footer className={styles.empty}>
+            <footer className={!episode ? styles.empty : ''}>
                 <div className={styles.progress}>
                     <span>00:00</span>
                     <div className={styles.slider}>
