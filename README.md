@@ -10,25 +10,75 @@ npm run dev
 yarn dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+- [ ] Tornar responsivo
+- [ ] PWA
+- [ ] Tema Dark
+- [ ] Implementar o Electron para versões Desktop
 
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
+<h1 align=center>
+<img src="https://res.cloudinary.com/samanosuke/image/upload/v1619729257/cover_podcastr_cai2zy.png" />
+</h1>
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.js`.
+# Summary
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+- [About](#about)
+- [Built with](#technologies)
+- [How to Use](#how-to-use)
+- [License](#license)
 
-## Learn More
+<a id='about'/>
 
-To learn more about Next.js, take a look at the following resources:
+## :information_source: About
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+The :headphones:**Podcastr** is a Web application that aims to bring you even closer to the best technology podcast!
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+This project was developed during **[Next Level Week](https://nextlevelweek.com/)**, an event provided by **[@Rocketseat](https://github.com/Rocketseat)** to teach new technologies, tools and hacks to leverage participants' developer careers.
 
-## Deploy on Vercel
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+<a id='technologies'/>
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+## :gear: Built With
+
+This project was developed with the following technologies:
+
+#### **Frontend** <sub><sup>Next.js + TypeScript</sup></sub>
+  - [Next.js](https://nextjs.org/)
+  - [React](https://pt-br.reactjs.org/)
+  - [Typescript](https://www.typescriptlang.org/)
+  - [Context API](https://reactjs.org/docs/context.html)
+  - [Axios](https://github.com/axios/axios)
+  - [Sass](https://sass-lang.com/)
+
+<a id='how-to-use'/>
+
+## :joystick: How to Use
+
+### Requirements
+
+To run the application you'll need:
+* [Git](https://git-scm.com)
+* [Node](https://nodejs.org/)
+* [Yarn](https://yarnpkg.com/) or [npm](https://www.npmjs.com/)
+* Clone the repository:
+  * ```$ git clone https://github.com/Samanosukeh/podcastr.git ```
+
+
+Now go to project folder and run:
+
+
+```bash
+$ cd podcastr_next
+
+# install the dependencies
+$ yarn
+
+# run web app
+$ yarn dev
+```
+
+
+<a id='license'/>
+
+## :page_with_curl: License
+
+This project is under the **MIT license**. See the [LICENSE](https://github.com/Samanosukeh/podcastr/blob/master/LICENSE) for more information.
