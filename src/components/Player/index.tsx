@@ -26,7 +26,7 @@ export function Player() {
         toggleLoop,
         toggleShuffle,
         setPlayingState,
-        //clearPlayerState,
+        clearPlayerState,
         playNext,
         playPrevious,
         hasNext,
@@ -52,6 +52,19 @@ export function Player() {
         audioRef.current.addEventListener('timeupdate', event => {
             setProgress(Math.floor(audioRef.current.currentTime));
         });
+    }
+
+    function handleSeek(amount: number) {
+        audioRef.current.currentTime = amount;
+        setProgress(amount);//manter coerência entre tempo do audio e progresso da bolinha
+    }
+
+    function handleEpisodeEnded() {
+        if (hasNext) {
+            playNext()
+        } else {
+            clearPlayerState()
+        }
     }
 
     const episode = episodeList[currentEpisodeIndex];//se a lista tiver vazia ele nao retornará nada
@@ -84,6 +97,7 @@ export function Player() {
                              max={episode.duration}//duração máxima do slider
                              value={progress}//o tanto que o episódio ja progrediu
                              trackStyle={ { backgroundColor: '#04d361'}}
+                             onChange={handleSeek}//quando um usuário arrastar a bolinha
                              railStyle={{ backgroundColor: '#9f75ff'}}//restante da barrinha que ainda nao foi carregada
                              handleStyle={{ borderColor: '#04d361'}}//cor da borda da bolinha
                             />
@@ -98,6 +112,7 @@ export function Player() {
                     <audio
                       src={episode.url}
                       autoPlay
+                      onEnded={handleEpisodeEnded} //o que fazer quando um ep acabar
                       ref={audioRef} /* autoPlay, assim que a tag for exibida começa a tocar */
                       onPlay={() => setPlayingState(true)}
                       onPause={() => setPlayingState(false)}
