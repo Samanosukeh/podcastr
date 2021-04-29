@@ -2,6 +2,36 @@
 As regras de CSS desse componente nunca serão compartilhadas com os outros componentes por conta do module
 */
 
+@media screen and (max-width: 1370px) {
+    .playerContainer {
+        padding: 3rem 2rem !important;
+        width: 20rem !important;
+        margin: 0 auto;
+        height: 100vh;
+    }
+
+    .emptyPlayer {
+        height: 15rem !important;
+        width: 90% !important;
+        padding: 1rem !important;
+    }
+
+    .currentEpisode {
+        img {
+            border-radius: 1.0rem !important;
+            width: 180px;
+            height: 180px;;
+        }
+
+        strong {
+            display: block;
+            margin-top: 1rem;
+            font: 400 1rem Lexend, sans-serif !important;
+            line-height: 1rem;
+        }
+    }
+}
+
 .playerContainer {
     padding: 3rem 4rem;
     width: 26.5rem;

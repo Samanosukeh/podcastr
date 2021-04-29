@@ -6,3 +6,14 @@
     }
 
 }
+
+@media screen and (max-width: 1370px) {
+    .wrapper {
+        position: relative;
+    }
+
+    .mainTag {
+      margin: 0 auto;
+      width: 70%;
+    }
+}

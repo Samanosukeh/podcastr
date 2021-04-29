@@ -1,3 +1,19 @@
+@media screen and (max-width: 1370px) {
+    .latestEpisodes {
+        .episodeDetails {
+            font-size: 15px !important;
+
+            p {
+                font-size: 14px !important;
+            }
+
+            span {
+                font-size: 12px !important;
+            }
+        }
+    }
+}
+
 .homepage {
     padding: 0 4rem;
     height: calc(100vh - 6.5rem);/*Homepage pega o tamanho todo da tela tirando o cabeçalho*/
@@ -10,14 +26,22 @@
 }
 
 .latestEpisodes {
+    position: relative;
+
     ul {
+        display: flex;//grid
+        flex-direction: row;
+        //flex-wrap: wrap;
+        //flex: left;
         list-style: none;
-        display: grid;
-        grid-template-columns: repeat(2, 1fr);
+        //display: grid;
+        //grid-template-columns: repeat(2, 1fr);
         gap: 1.5rem;
     }
 
     li {
+        //flex: 50%;
+        width: 50%;
         background: var(--white);
         border: 1px solid var(--gray-100);
         padding: 1.25rem;

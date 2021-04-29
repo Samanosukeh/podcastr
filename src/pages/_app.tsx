@@ -14,7 +14,7 @@ function MyApp({ Component, pageProps }) {
   return (
     <PlayerContextProvider>
       <div className={styles.wrapper}>
-        <main>
+        <main className={styles.mainTag}>
           <Header />
           <Component {...pageProps} />
         </main>
