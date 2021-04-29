@@ -29,7 +29,7 @@ As regras de CSS desse componente nunca serão compartilhadas com os outros comp
     footer {
         align-self: stretch;
 
-        &.empty {/*quando o footer estiver com a estilizacao de empty faça*/
+        &.empty .progress{/*quando o footer estiver com a estilizacao de empty faça*/
             opacity: 0.5;
         }
     }
@@ -117,10 +117,19 @@ As regras de CSS desse componente nunca serão compartilhadas com os outros comp
         //se o botão estiver desabilitado
         &:disabled {
             cursor: default;
+            opacity: 0.5;
         }
 
         &:hover:not(:disabled) {
             filter: brightness(0.7);
+        }
+
+        &.isActive {
+            filter: invert(0.35) sepia(1) saturate(3) hue-rotate(100deg);
+        }
+
+        &.isActive:hover {
+            filter: brightness(0.6) invert(0.35) sepia(1) saturate(3) hue-rotate(100deg);
         }
 
         &.playButton {

@@ -3,7 +3,6 @@
 // SSG - static site generator -> como só é postado 1 episódio por dia, não há necessidade de buscar os dados várias vezes
 
 import { GetStaticProps } from 'next';
-import { useContext } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';//usado para que ao clicar em um link não carrege todo o conteúdo que ja foi carregado
 import { api } from '../services/api';
@@ -11,7 +10,7 @@ import { format, parseISO } from 'date-fns'; //parseISO pega uma data e converte
 import ptBR from 'date-fns/locale/pt-BR';
 
 import { convertDurationToTimeString } from '../utils/convertDurationToTimeString';
-import { PlayerContext } from '../contexts/PlayerContext';
+import { usePlayer } from '../contexts/PlayerContext';
 
 import styles from './home.module.scss';
 
@@ -33,7 +32,9 @@ type HomeProps = {
 }
 
 export default function Home({ latestEpisodes, allEpisodes }: HomeProps) {//recebendo os props buscados no await
-  const { play } = useContext(PlayerContext);// pegando apenas a função play
+  const { playList } = usePlayer();// pegando apenas a função playList
+
+  const episodeList = [...latestEpisodes, ...allEpisodes];
   
   return (
     <div className={styles.homepage}>
@@ -41,7 +42,7 @@ export default function Home({ latestEpisodes, allEpisodes }: HomeProps) {//rece
         <h2>Últimos lançamentos </h2>
 
         <ul>
-          {latestEpisodes.map(episode => {
+          {latestEpisodes.map((episode, index) => {//cada episodio tem um index
             return (
               <li key={episode.id}>
                 {/* Image serve para manter as imagens no mesmo tamanho, altura e largura serve como 
@@ -64,7 +65,7 @@ export default function Home({ latestEpisodes, allEpisodes }: HomeProps) {//rece
                 </div>
 
                 {/*Passando uma arrow funcion por que a função passada nao tem retorno e recebe um argumento */}
-                <button type="button" onClick={() => play(episode)}>
+                <button type="button" onClick={() => playList(episodeList, index)}> {/*o primeiro começa a partir do momento que acada os 2 ultimos */}
                   <img src="/play-green.svg" alt="Tocar episódio"/>
                 </button>
               </li>
@@ -87,7 +88,7 @@ export default function Home({ latestEpisodes, allEpisodes }: HomeProps) {//rece
             </tr>
           </thead>
           <tbody>
-            {allEpisodes.map(episode => {
+            {allEpisodes.map((episode, index) => {
               return (
                 <tr key={episode.id}>
                   <td style={{ width: 72}}>
@@ -109,7 +110,7 @@ export default function Home({ latestEpisodes, allEpisodes }: HomeProps) {//rece
                   <td style={{ width: 100}}>{episode.publishedAt}</td>
                   <td>{episode.durationAsString}</td>
                   <td>
-                    <button type="button">
+                    <button type="button" onClick={() => playList(episodeList, index + latestEpisodes.length)}>
                       <img src="/play-green.svg" alt="Tocar episódio"/>
                     </button>
                   </td>
