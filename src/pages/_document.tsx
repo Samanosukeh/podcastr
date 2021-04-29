@@ -12,6 +12,8 @@ export default class MyDocument extends Document {
                     {/* Adicionando as fontes aqui */}
                     <link rel="preconnect" href="https://fonts.gstatic.com" /> {/* No React toda tag precisa ter o fechamento no final </> */}
                     <link href="https://fonts.googleapis.com/css2?family=Inter&family=Lexend:wght@500;600&display=swap" rel="stylesheet" />
+
+                    <link rel="shortcut icon" href="/favicon.png" type="image/png"/>
                 </Head>
                 <body>
                     <Main />
