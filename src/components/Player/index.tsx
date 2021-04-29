@@ -1,4 +1,4 @@
-import { useRef, useEffect } from 'react';
+import { useRef, useEffect, useState } from 'react';
 import Image from 'next/image';
 import Slider from 'rc-slider';
 
@@ -7,10 +7,14 @@ import 'rc-slider/assets/index.css';//como o slider só será usado nessa págin
 import { usePlayer } from '../../contexts/PlayerContext';
 
 import styles from './styles.module.scss';
+import { convertDurationToTimeString } from '../../utils/convertDurationToTimeString';
 
 export function Player() {
     //referencia para pegar tag audio
     const audioRef = useRef<HTMLAudioElement>(null);//a tipagem ajuda a saber quais métodos tem dentro do objeto
+
+    /*Controle da barrinha fica dentro do player pois não é utilizado em outras partes*/
+    const [progress, setProgress] = useState(0);
 
     const { 
         episodeList, 
@@ -43,6 +47,13 @@ export function Player() {
 
     }, [isPlaying]);
 
+    function setupProgressListener() {//funçao que fica ouvindo o tempo de duração
+        audioRef.current.currentTime = 0;//sempre que mudar de um audio pra outro volta pra zero
+        audioRef.current.addEventListener('timeupdate', event => {
+            setProgress(Math.floor(audioRef.current.currentTime));
+        });
+    }
+
     const episode = episodeList[currentEpisodeIndex];//se a lista tiver vazia ele nao retornará nada
 
     return (
@@ -66,10 +77,12 @@ export function Player() {
 
             <footer className={!episode ? styles.empty : ''}>
                 <div className={styles.progress}>
-                    <span>00:00</span>
+                    <span>{convertDurationToTimeString(progress)}</span>
                     <div className={styles.slider}>
                         { episode ? (
                             <Slider 
+                             max={episode.duration}//duração máxima do slider
+                             value={progress}//o tanto que o episódio ja progrediu
                              trackStyle={ { backgroundColor: '#04d361'}}
                              railStyle={{ backgroundColor: '#9f75ff'}}//restante da barrinha que ainda nao foi carregada
                              handleStyle={{ borderColor: '#04d361'}}//cor da borda da bolinha
@@ -78,7 +91,7 @@ export function Player() {
                             <div className={styles.emptySlider} />
                         )}
                     </div>
-                    <span>00:00</span>
+                    <span>{convertDurationToTimeString(episode?.duration ?? 0)}</span>
                 </div>
 
                 { episode && (
@@ -89,6 +102,7 @@ export function Player() {
                       onPlay={() => setPlayingState(true)}
                       onPause={() => setPlayingState(false)}
                       loop={isLooping}
+                      onLoadedMetadata={setupProgressListener}//dispara assim que carregar os dados do episódio
                     /> 
                 )}
 
