@@ -1,6 +1,8 @@
+## Demo: (https://podcastr-samanosukeh.vercel.app/)
+
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
-## Getting Started
+# Getting Started
 
 First, run the development server:
 
@@ -10,10 +12,6 @@ npm run dev
 yarn dev
 ```
 
-- [ ] Tornar responsivo
-- [ ] PWA
-- [ ] Tema Dark
-- [ ] Implementar o Electron para versões Desktop
 
 <h1 align=center>
 <img src="https://res.cloudinary.com/samanosuke/image/upload/v1619729257/cover_podcastr_cai2zy.png" />
@@ -67,7 +65,7 @@ Now go to project folder and run:
 
 
 ```bash
-$ cd podcastr_next
+$ cd podcastr
 
 # install the dependencies
 $ yarn
